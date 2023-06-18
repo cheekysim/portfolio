@@ -1,7 +1,15 @@
-import { useState } from "react";
+import { RefObject, useEffect, useState, useRef } from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { srcery } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import "../assets/css/Cards.css";
+import { useTypeWriter } from "../hooks/useTypeWriter";
+
+interface LanguageCardProps {
+  card: { title: string; code: string; info: string };
+  currentCard: number;
+  index: number;
+  langCards: { title: string; code: string; info: string }[];
+}
 
 export const Langcards = () => {
   const [currentCard, setCurrentCard] = useState(0);
@@ -26,7 +34,7 @@ if x > y:
   print('x is greater than y')
 else:
   print('y is greater than x')`,
-      info: "I started using python not that long ago, I have built multiple projects in python",
+      info: "",
     },
     {
       title: "HTML",
@@ -136,35 +144,80 @@ async function getDnsRecords(zoneId): {
               <div className="shadow"></div>
             </div>
           ))}
+          <button className="next glass-light" onClick={cycleForwards}>
+            {">"}
+          </button>
+          <button className="prev glass-light" onClick={cycleBackwards}>
+            {"<"}
+          </button>
         </div>
-        {/* <div className="textWrapper">
+        <div className="textWrapper">
           {langCards.map((card, index) => (
-            <div
-              key={index}
-              className={`card glass-light ${card.title.toLowerCase()}`}
-              data-active={currentCard === index ? "true" : "false"}
-            >
-              <h4>{card.title}</h4>
-              <p>{card.info}</p>
-              <div className="shadow"></div>
-            </div>
+            <LanguageCard
+              card={card}
+              currentCard={currentCard}
+              index={index}
+              langCards={langCards}
+            />
           ))}
-        </div> */}
-        <button className="next glass-light" onClick={cycleForwards}>
-          {">"}
-        </button>
-        <button className="prev glass-light" onClick={cycleBackwards}>
-          {"<"}
-        </button>
+        </div>
       </div>
     </section>
   );
 };
 
+function LanguageCard({
+  card,
+  currentCard,
+  index,
+  langCards,
+}: LanguageCardProps) {
+  const [cardInfoText, setCardInfoText] = useState<string>("");
+
+  const info = useRef<string>(card.info);
+  const elementRef = useRef<HTMLParagraphElement>(null);
+
+  useEffect(() => {
+    const content = info.current;
+    let newText = "";
+    const type = async () => {
+      for (let i = 0; i < content.length; i++) {
+        newText += content[i];
+        setCardInfoText(newText);
+        await new Promise((resolve) =>
+          setTimeout(resolve, 1000 / content.length)
+        );
+      }
+    };
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            type();
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+    if (elementRef.current) observer.observe(elementRef.current);
+  }, [currentCard]);
+
+  return (
+    <div
+      key={index}
+      className={`card glass-light ${card.title.toLowerCase()}`}
+      data-active={getActiveText(currentCard, index, langCards)}
+    >
+      <h4>{card.title}</h4>
+      <p ref={elementRef}>{cardInfoText}</p>
+    </div>
+  );
+}
+
 function getCardActive(
   currentCard: number,
   index: number,
-  langCards: { title: string; code: string }[]
+  langCards: { title: string; code: string; info: string }[]
 ) {
   return (() => {
     switch ((currentCard + index) % langCards.length) {
@@ -178,6 +231,23 @@ function getCardActive(
         return "false";
       default:
         return "prefalse";
+    }
+  })();
+}
+
+function getActiveText(
+  currentCard: number,
+  index: number,
+  langCards: { title: string; code: string; info: string }[]
+) {
+  return (() => {
+    switch ((currentCard + index) % langCards.length) {
+      case 0:
+        return "current";
+      case 1:
+        return "next";
+      default:
+        return "prev";
     }
   })();
 }

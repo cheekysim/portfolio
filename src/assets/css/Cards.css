@@ -1,39 +1,42 @@
-.langcardsWrapper,
-.langcardsText {
+.langcardsWrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   height: 100%;
   position: relative;
 }
 
-.langcardsWrapper {
-  width: 60%;
-}
-
-.langcardsText {
-  width: 40%;
-}
-
 .langcardsWrapper .cardWrapper {
   position: relative;
-  width: fit-content;
-  height: fit-content;
+  width: 60vw;
+  height: 100lvh;
+}
+.langcardsWrapper .textWrapper {
+  position: relative;
+  width: 40vw;
+  height: 100lvh;
 }
 
 .langcardsWrapper .cardWrapper .card {
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: translate(-50%, -50%);
   aspect-ratio: 5/3;
+}
+
+.langcardsWrapper .cardWrapper .card,
+.langcardsWrapper .textWrapper .card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 30vw;
   height: auto;
   overflow: hidden;
   border-radius: 1rem;
+  padding: 1rem;
   transition: all 0.3s ease;
 }
+
+/* Cards Animation */
 
 .langcardsWrapper .cardWrapper .card[data-active="current"] {
   transform: translate(-30%, -30%);
@@ -54,6 +57,22 @@
 .langcardsWrapper .cardWrapper .card[data-active="false"] {
   opacity: 0;
   transform: translate(-90%, -90%);
+}
+
+/* Text Cards Animation */
+
+.langcardsWrapper .textWrapper .card[data-active="next"] {
+  opacity: 0;
+  transform: translate(-50%, -70%);
+}
+
+.langcardsWrapper .textWrapper .card[data-active="prev"] {
+  opacity: 0;
+  transform: translate(-50%, -30%);
+}
+
+.langcardsWrapper .textWrapper .card[data-active="current"] {
+  opacity: 1;
 }
 
 .card .shadow {

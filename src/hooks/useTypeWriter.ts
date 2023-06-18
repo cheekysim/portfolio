@@ -14,6 +14,7 @@ export const useTypeWriter = (
 
   useEffect(() => {
     if (!isVisible || prevText.current === content) return;
+    setText("");
     prevText.current = content;
     const type = async () => {
       for (let i = 0; i < content.length; i++) {
