@@ -1,7 +1,11 @@
 import { RefObject, useEffect, useRef, useState } from "react";
 
 export const useIntersectionObserver = (
-  options = {}
+  options = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.2,
+  }
 ): [boolean, RefObject<HTMLElement>] => {
   const ref = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState<boolean>(false);
