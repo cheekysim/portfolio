@@ -1,0 +1,115 @@
+.langcardsWrapper,
+.langcardsText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  position: relative;
+}
+
+.langcardsWrapper {
+  width: 60%;
+}
+
+.langcardsText {
+  width: 40%;
+}
+
+.langcardsWrapper .cardWrapper {
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+}
+
+.langcardsWrapper .cardWrapper .card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  aspect-ratio: 5/3;
+  width: 30vw;
+  height: auto;
+  overflow: hidden;
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+}
+
+.langcardsWrapper .cardWrapper .card[data-active="current"] {
+  transform: translate(-30%, -30%);
+  z-index: 3;
+}
+.langcardsWrapper .cardWrapper .card[data-active="second"] {
+  z-index: 2;
+}
+.langcardsWrapper .cardWrapper .card[data-active="third"] {
+  transform: translate(-70%, -70%);
+  z-index: 1;
+}
+
+.langcardsWrapper .cardWrapper .card[data-active="prefalse"] {
+  opacity: 0;
+  transform: translate(-10%, -10%);
+}
+.langcardsWrapper .cardWrapper .card[data-active="false"] {
+  opacity: 0;
+  transform: translate(-90%, -90%);
+}
+
+.card .shadow {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  aspect-ratio: 5/3;
+  width: 30vw;
+  height: 10%;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    var(--color-tertiary) 100%
+  );
+  z-index: 1;
+}
+
+section.languages {
+  background-image: url("/images/programming-background.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+.langcardsWrapper .next,
+.langcardsWrapper .prev {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 4;
+  cursor: pointer;
+  font-size: 3rem;
+  border-radius: 50%;
+  aspect-ratio: 1/1;
+  width: 5rem;
+  height: auto;
+  padding: 1rem;
+  transition: all 0.3s ease;
+  text-align: center;
+  border: none;
+  color: var(--color-text);
+}
+
+.langcardsWrapper .next:hover,
+.langcardsWrapper .prev:hover {
+  background-color: var(--color-primary);
+}
+
+.langcardsWrapper .next:active,
+.langcardsWrapper .prev:active {
+  transform: translateY(-50%) scale(0.9);
+}
+
+.langcardsWrapper .next {
+  right: 1rem;
+}
+
+.langcardsWrapper .prev {
+  left: 1rem;
+}
