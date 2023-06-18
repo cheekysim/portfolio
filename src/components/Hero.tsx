@@ -6,7 +6,7 @@ import { RefObject } from "react";
 export const Hero = () => {
   const [headingText, headingRef] = useTypeWriter("Euan Bell", 1400, 1000);
   const [subHeadingText, subHeadingRef] = useTypeWriter(
-    "Work In Progress",
+    "Full Stack Developer",
     2000,
     1000
   );
