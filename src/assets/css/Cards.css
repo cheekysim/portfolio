@@ -109,10 +109,11 @@ section.languages {
   width: 5rem;
   height: auto;
   padding: 1rem;
-  transition: all 0.3s ease;
   text-align: center;
   border: none;
   color: var(--color-text);
+  outline: 0px solid var(--color-primary);
+  transition: all 0.3s ease;
 }
 
 .langcardsWrapper .next:hover,
@@ -123,6 +124,11 @@ section.languages {
 .langcardsWrapper .next:active,
 .langcardsWrapper .prev:active {
   transform: translateY(-50%) scale(0.9);
+}
+
+.langcardsWrapper .next:focus-visible,
+.langcardsWrapper .prev:focus-visible {
+  outline: 3px solid var(--color-primary);
 }
 
 .langcardsWrapper .next {

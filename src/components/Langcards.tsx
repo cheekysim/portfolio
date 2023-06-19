@@ -1,8 +1,8 @@
-import { RefObject, useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { srcery } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import "../assets/css/Cards.css";
-import { useTypeWriter } from "../hooks/useTypeWriter";
+import { sleep } from "../utils/utils";
 
 interface LanguageCardProps {
   card: { title: string; code: string; info: string };
@@ -34,7 +34,7 @@ if x > y:
   print('x is greater than y')
 else:
   print('y is greater than x')`,
-      info: "",
+      info: "I started using python not that long ago, I have built multiple projects in python, I started using python not that long ago, I have built multiple projects in python, I started using python not that long ago, I have built multiple projects in python, I started using python not that long ago, I have built multiple projects in python, ",
     },
     {
       title: "HTML",
@@ -87,7 +87,7 @@ else:
     },
     {
       title: "JavaScript",
-      code: `async function getZones(): {
+      code: `async function getZones() {
     const options = {
         method: "GET",
         url: \`https://api.cloudflare.com/client/v4/zones\`,
@@ -144,11 +144,11 @@ async function getDnsRecords(zoneId): {
               <div className="shadow"></div>
             </div>
           ))}
-          <button className="next glass-light" onClick={cycleForwards}>
-            {">"}
-          </button>
           <button className="prev glass-light" onClick={cycleBackwards}>
             {"<"}
+          </button>
+          <button className="next glass-light" onClick={cycleForwards}>
+            {">"}
           </button>
         </div>
         <div className="textWrapper">
@@ -173,26 +173,38 @@ function LanguageCard({
   langCards,
 }: LanguageCardProps) {
   const [cardInfoText, setCardInfoText] = useState<string>("");
+  const oldText = useRef<string>("");
 
   const info = useRef<string>(card.info);
+  const length = useRef<number>(langCards.length);
+  const i = useRef<number>(index);
   const elementRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
+    if ((currentCard + i.current) % length.current !== 0) {
+      oldText.current = "";
+      setCardInfoText("");
+    }
     const content = info.current;
     let newText = "";
+    setCardInfoText(newText);
     const type = async () => {
       for (let i = 0; i < content.length; i++) {
         newText += content[i];
         setCardInfoText(newText);
-        await new Promise((resolve) =>
-          setTimeout(resolve, 1000 / content.length)
-        );
+        await sleep(1000 / content.length);
       }
     };
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
+        entries.forEach(async (entry) => {
+          if (
+            entry.isIntersecting &&
+            (currentCard + i.current) % length.current === 0 &&
+            oldText.current !== info.current
+          ) {
+            oldText.current = info.current;
+            await sleep(200);
             type();
           }
         });
@@ -219,6 +231,7 @@ function getCardActive(
   index: number,
   langCards: { title: string; code: string; info: string }[]
 ) {
+  console.log(langCards[index].title, (currentCard + index) % langCards.length);
   return (() => {
     switch ((currentCard + index) % langCards.length) {
       case 0:
