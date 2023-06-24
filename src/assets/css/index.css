@@ -19,14 +19,12 @@
 }
 
 html {
-  /* scroll-snap-type: y mandatory; */
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
 
 body {
-  width: calc(100vw - var(--scrollbar-width));
   color: var(--color-text);
   background-color: var(--color-tertiary);
 }
@@ -36,8 +34,8 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: calc(100vw - var(--scrollbar-width));
-  height: 100vh;
+  width: 100lvw;
+  height: 100lvh;
   min-width: -moz-fit-content;
   min-width: fit-content;
   min-height: -moz-fit-content;
