@@ -127,7 +127,7 @@ async function getDnsRecords(zoneId): {
         <div className="cardWrapper">
           {langCards.map((card, index) => (
             <div
-              key={index}
+              key={`${card.title}-card`}
               className={`card glass-light ${card.title.toLowerCase()}`}
               data-active={getCardActive(currentCard, index, langCards)}
             >
@@ -154,6 +154,7 @@ async function getDnsRecords(zoneId): {
         <div className="textWrapper">
           {langCards.map((card, index) => (
             <LanguageCard
+              key={`${card.title}-text`}
               card={card}
               currentCard={currentCard}
               index={index}
@@ -174,6 +175,7 @@ function LanguageCard({
 }: LanguageCardProps) {
   const [cardInfoText, setCardInfoText] = useState<string>("");
   const oldText = useRef<string>("");
+  const cardActive = useRef<boolean>(false);
 
   const info = useRef<string>(card.info);
   const length = useRef<number>(langCards.length);
@@ -184,12 +186,16 @@ function LanguageCard({
     if ((currentCard + i.current) % length.current !== 0) {
       oldText.current = "";
       setCardInfoText("");
+      cardActive.current = false;
+    } else {
+      cardActive.current = true;
     }
     const content = info.current;
     let newText = "";
     setCardInfoText(newText);
     const type = async () => {
       for (let i = 0; i < content.length; i++) {
+        if (cardActive.current === false) return;
         newText += content[i];
         setCardInfoText(newText);
         await sleep(1000 / content.length);
@@ -231,7 +237,6 @@ function getCardActive(
   index: number,
   langCards: { title: string; code: string; info: string }[]
 ) {
-  console.log(langCards[index].title, (currentCard + index) % langCards.length);
   return (() => {
     switch ((currentCard + index) % langCards.length) {
       case 0:
