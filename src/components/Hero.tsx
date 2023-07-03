@@ -14,22 +14,10 @@ export const Hero = () => {
   useEffect(() => {
     toast("Welcome to my website!", {
       icon: "👋",
-      style: {
-        borderRadius: "10px",
-        background: "#333",
-        color: "#fff",
-        fontSize: "1.5rem",
-      },
     });
     setTimeout(() => {
       toast("It is still work in progress but feel free to look around", {
         icon: "👀",
-        style: {
-          borderRadius: "10px",
-          background: "#333",
-          color: "#fff",
-          fontSize: "1.5rem",
-        },
       });
     }, 2500);
   }, []);

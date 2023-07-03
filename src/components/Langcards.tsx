@@ -21,6 +21,7 @@ export const Langcards = () => {
   const cycleBackwards = () => {
     setCurrentCard((currentCard + 1) % langCards.length);
   };
+  
 
   const langCards = [
     {
