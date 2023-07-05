@@ -21,39 +21,101 @@ export const Langcards = () => {
   const cycleBackwards = () => {
     setCurrentCard((currentCard + 1) % langCards.length);
   };
-  
 
   const langCards = [
     {
       title: "Python",
-      code: `print('Hello, world!')
-print('This is Python code.')
-x = 5
-y = 10
-print(x + y)
-if x > y:
-  print('x is greater than y')
-else:
-  print('y is greater than x')`,
+      code: `def loopInput(inp: str, options: list[str], autocorrect: bool = False, cutoff: int = 3) -> str:
+while True:
+  inp = input(inp).lower()
+  if autocorrect:
+    lowest = [False, 0]
+    for i in options:
+      if len(i) > lowest[1]:
+        lowest[1] = len(i)
+
+    for option in options:
+      distances = [[0 for _ in range(len(option) + 1)] for _ in range(len(inp) + 1)]
+      for t1 in range(len(inp) + 1):
+        distances[t1][0] = t1
+      for t2 in range(len(option) + 1):
+        distances[0][t2] = t2
+
+      for t1 in range(1, len(inp) + 1):
+        for t2 in range(1, len(option) + 1):
+          if inp[t1-1] == option[t2-1]:
+            distances[t1][t2] = distances[t1 - 1][t2 - 1]
+          else:
+            a = distances[t1][t2 - 1]
+            b = distances[t1 - 1][t2]
+            c = distances[t1 - 1][t2 - 1]
+
+            if a <= b and a <= c:
+              distances[t1][t2] = a + 1
+            elif b <= a and b <= c:
+              distances[t1][t2] = b + 1
+            else:
+              distances[t1][t2] = c + 1
+
+      distance = distances[len(inp)][len(option)]
+
+      if distance < lowest[1] and distance <= cutoff:
+        lowest[0] = option
+        lowest[1] = distance
+
+    if lowest[0] == False:
+      print(f"Choice must be: {', '.join(options[:-1])} or {options[-1]}")
+    else:
+      return lowest[0]
+  else:
+    if inp in options:
+      return inp
+    else:
+      print(f"Choice must be: {', '.join(options[:-1])} or {options[-1]}")`,
       info: "I started using python not that long ago, I have built multiple projects in python, I started using python not that long ago, I have built multiple projects in python, I started using python not that long ago, I have built multiple projects in python, I started using python not that long ago, I have built multiple projects in python, ",
     },
     {
       title: "HTML",
-      code: `<!DOCTYPE html>
-<html>
-  <head>
-    <title>My Website</title>
-  </head>
-  <body>
-    <h1>Welcome to my website!</h1>
-    <p>This is a paragraph.</p>
-    <ul>
-      <li>List item 1</li>
-      <li>List item 2</li>
-      <li>List item 3</li>
-    </ul>
-  </body>
-</html>`,
+      code: `<link rel="stylesheet" href="/css/cards.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<section class="cards-container">
+  <div class="card loading-card">
+        <div class="loading" data-loading="true"></div>
+        <div class="loader"></div>
+    <img src="/images/cg.webp" alt="Coleg Gwent Logo" />
+    <div class="info">
+      <div class="points">
+        <h2>Points</h2>
+        <h3 id="cgp">LOADING</h3>
+      </div>
+      <div class="pos">
+        <h2>Position</h2>
+        <h3 id="cgpos">LOADING</h3>
+      </div>
+    </div>
+  </div>
+  <div class="card loading-card">
+        <div class="loading" data-loading="true"></div>
+        <div class="loader"></div>
+    <div id="chart-container"><canvas id="chart" data-loading="true"></canvas></div>
+    <h2 id="winning">LOADING Is Winning By LOADING Points</h2>
+  </div>
+  <div class="card loading-card">
+        <div class="loading" data-loading="true"></div>
+        <div class="loader"></div>
+    <img src="/images/bc.webp" alt="Bridgend College Logo" />
+    <div class="info">
+      <div class="points">
+        <h2>Points</h2>
+        <h3 id="bcp">LOADING</h3>
+      </div>
+      <div class="pos">
+        <h2>Position</h2>
+        <h3 id="bcpos">LOADING</h3>
+      </div>
+    </div>
+  </div>
+</section>`,
       info: "I started using HTML not that long ago, I have built multiple projects in HTML",
     },
     {
@@ -117,7 +179,38 @@ async function getDnsRecords(zoneId): {
     },
     {
       title: "TypeScript",
-      code: "TypeScript is a programming language developed and maintained by Microsoft. It is a strict syntactical superset of JavaScript and adds optional static typing to the language.",
+      code: `await Promise.all(
+  formattedShifts.map(async (shift: Shift) => {
+    // Check if shift already exists
+    const shifts = await db.read(shift.id, { date: shift.date });
+    // If shift doesn't exist, write it
+    if (shifts.length === 0) {
+      console.log(\`Shift: \${shift.id} \${shift.date} doesn't exist\`);
+      return await db.write(shift.id, shift);
+    } else {
+      // If shift exists, update it
+      shifts.forEach(async (dbshift) => {
+        if (
+          dbshift.start === shift.start &&
+          dbshift.end === shift.end &&
+          dbshift.confirmed === shift.confirmed
+        )
+          return;
+        const update = {
+          $set: {
+            start: shift.start,
+            end: shift.end,
+            hours: shift.hours,
+            paid_hours: shift.paid_hours,
+            unpaid_hours: shift.unpaid_hours,
+            confirmed: shift.confirmed,
+          },
+        };
+        return await db.update(shift.id, { date: shift.date }, update);
+      });
+    }
+  })
+);`,
       info: "I started using typescript not that long ago, I have built multiple projects in typescript",
     },
   ];
