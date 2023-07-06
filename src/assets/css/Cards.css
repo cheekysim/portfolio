@@ -36,6 +36,10 @@
   transition: all 0.3s ease;
 }
 
+.langcardsWrapper .cardWrapper .card pre code span {
+  font-size: 1.5rem;
+}
+
 /* Cards Animation */
 
 .langcardsWrapper .cardWrapper .card[data-active="current"] {
