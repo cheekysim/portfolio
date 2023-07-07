@@ -1,8 +1,8 @@
-import { useEffect, useState, useRef } from "react";
+import { useState } from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { srcery } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import "../assets/css/Cards.css";
-import { sleep } from "../utils/utils";
+import { HTMLParser } from "./HTMLParser";
 
 interface LanguageCardProps {
   card: { title: string; code: string; info: string };
@@ -72,7 +72,7 @@ while True:
       return inp
     else:
       print(f"Choice must be: {', '.join(options[:-1])} or {options[-1]}")`,
-      info: "<p>Python was the first language I started learning.<br>I started learning it in 2018 by making my own discord bot. I decided to make a discord bot because I wanted to enhance my own discord server and was fascinated about how I could create it myself.<br>This was what started me with programming and what kept me going for my first few years.</p><p>I have made many projects along the way ranging many subjects, Databases, Discord Bots, Web Interfaces, Executables, Machine Learning. But over these years I was mainly focusing on school and this was just a hobby. From these small projects I gained a good understanding of python and its syntax and could overcome any challenge presented to me.</p><p>I have 3 Projects which I would define as notable.<ul><li>VoiceMeeter Fix</li><li>cheekyutils</li><li>png2ico</li></ul></p>",
+      info: "<p>Python was the first language I started learning. I started learning it in 2018 by making my own discord bot. I decided to make a discord bot because I wanted to enhance my own discord server and was fascinated about how I could create it myself. This was what started me with programming and what kept me going for my first few years.</p><p>I have made many projects along the way ranging many subjects, Databases, Discord Bots, Web Interfaces, Executables, Machine Learning. But over these years I was mainly focusing on school and this was just a hobby. From these small projects I gained a good understanding of python and its syntax and could overcome any challenge presented to me.</p><p>I have 3 Projects which I would define as notable.<ul><li>VoiceMeeter Fix</li><li>cheekyutils</li><li>png2ico</li></ul></p>",
     },
     {
       title: "HTML",
@@ -267,72 +267,6 @@ function LanguageCard({
   index,
   langCards,
 }: LanguageCardProps) {
-  const [cardInfoText, setCardInfoText] = useState<string>("");
-  const oldText = useRef<string>("");
-  const cardActive = useRef<boolean>(false);
-  const info = useRef<string>(card.info);
-  const length = useRef<number>(langCards.length);
-  const i = useRef<number>(index);
-  const elementRef = useRef<HTMLParagraphElement>(null);
-
-  useEffect(() => {
-    const adjustCardActiveState = () => {
-      cardActive.current = isCurrentLanguageCard();
-    };
-    const isCurrentLanguageCard = () => {
-      return (currentCard + i.current) % length.current === 0;
-    };
-    const observeElementIntersection = () => {
-      if (elementRef.current) {
-        const observer = new IntersectionObserver(intersectionCallback, {
-          threshold: 0.5,
-        });
-        observer.observe(elementRef.current);
-      }
-    };
-    const intersectionCallback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach(async (entry) => {
-        if (
-          entry.isIntersecting &&
-          isCurrentLanguageCard() &&
-          oldText.current !== info.current
-        ) {
-          oldText.current = info.current;
-          await sleep(200);
-          type();
-        }
-      });
-    };
-    const setEmptyCardTextIfInactive = () => {
-      if (!cardActive.current) {
-        oldText.current = "";
-        setCardInfoText("");
-      }
-    };
-
-    const type = async () => {
-      const content = info.current;
-      const newText = "";
-      setCardInfoText(newText);
-      await displayTextWithAnimation(content, newText);
-    };
-
-    const displayTextWithAnimation = async (
-      content: string,
-      newText: string
-    ) => {
-      for (let i = 0; i < content.length; i++) {
-        if (!cardActive.current) return;
-        newText += content[i];
-        setCardInfoText(newText);
-        await sleep(1000 / content.length);
-      }
-    };
-    adjustCardActiveState();
-    setEmptyCardTextIfInactive();
-    observeElementIntersection();
-  }, [currentCard]);
-
   return (
     <div
       key={index}
@@ -340,10 +274,7 @@ function LanguageCard({
       data-active={getActiveText(currentCard, index, langCards)}
     >
       <h4>{card.title}</h4>
-      <div
-        ref={elementRef}
-        dangerouslySetInnerHTML={{ __html: cardInfoText }}
-      ></div>
+      <HTMLParser html={card.info} />
     </div>
   );
 }

@@ -1,7 +1,6 @@
 import "./assets/css/App.css";
-// import { Hero } from "./components/Hero";
-// import { Langcards } from "./components/Langcards";
-import { HTMLParser } from "./components/HTMLParser";
+import { Hero } from "./components/Hero";
+import { Langcards } from "./components/Langcards";
 import { Toaster } from "react-hot-toast";
 
 function App() {
@@ -18,13 +17,8 @@ function App() {
           },
         }}
       />
-      {/* <Hero />
-      <Langcards /> */}
-      <HTMLParser
-        html={
-          "<p>Hello, World!</p><p>I'm a typewriter.</p><p>How are you?</p><ul><li>A</li><li>B</li></ul>"
-        }
-      />
+      <Hero />
+      <Langcards />
     </>
   );
 }

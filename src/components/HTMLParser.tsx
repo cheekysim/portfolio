@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-type HTMLItem = [string, string | HTMLItem[]];
+type HTMLItem = Array<string | HTMLItem> | string;
 
 type HTMLStructure = HTMLItem[];
 
@@ -49,9 +49,8 @@ function RenderElement({
   if (Array.isArray(element)) {
     const tag = element[0];
     const children = element.slice(1);
-    console.log(children);
     return React.createElement(
-      tag,
+      tag.toString(),
       null,
       children.map((child, index) => (
         <RenderElement key={index} element={child as string | HTMLItem} />

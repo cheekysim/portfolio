@@ -1,16 +1,11 @@
 import "../assets/css/Hero.css";
-import { useTypeWriter } from "../hooks/useTypeWriter";
 import "../assets/css/Hero.css";
-import { RefObject, useEffect } from "react";
+import "../assets/css/Typewriter.css";
+import { useEffect } from "react";
 import { toast } from "react-hot-toast";
+import TypeWriter from "typewriter-effect";
 
 export const Hero = () => {
-  const [headingText, headingRef] = useTypeWriter("Euan Bell", 1400, 1000);
-  const [subHeadingText, subHeadingRef] = useTypeWriter(
-    "Full Stack Developer",
-    2000,
-    1000
-  );
   useEffect(() => {
     toast("Welcome to my website!", {
       icon: "👋",
@@ -24,10 +19,24 @@ export const Hero = () => {
   return (
     <>
       <section className="hero-section">
-        <h1 ref={headingRef as RefObject<HTMLHeadingElement>}>{headingText}</h1>
-        <h2 ref={subHeadingRef as RefObject<HTMLHeadingElement>}>
-          {subHeadingText}
-        </h2>
+        <TypeWriter
+          options={{
+            cursor: "|",
+            delay: "natural",
+            deleteSpeed: 50,
+            loop: true,
+          }}
+          onInit={(typewriter) => {
+            typewriter
+              .typeString("Euan Bell")
+              .pauseFor(1400)
+              .deleteAll()
+              .typeString("Full Stack Developer")
+              .pauseFor(2000)
+              .start();
+          }}
+          component={"h1"}
+        />
         <img
           className="hero-image"
           src="/images/hero.jpg"
