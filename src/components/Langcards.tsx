@@ -2,7 +2,7 @@ import { useState } from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { srcery } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import "../assets/css/Cards.css";
-import { HTMLParser } from "./HTMLParser";
+import ReactMarkdown from "react-markdown";
 
 interface LanguageCardProps {
   card: { title: string; code: string; info: string };
@@ -72,7 +72,21 @@ while True:
       return inp
     else:
       print(f"Choice must be: {', '.join(options[:-1])} or {options[-1]}")`,
-      info: "<p>Python was the first language I started learning. I started learning it in 2018 by making my own discord bot. I decided to make a discord bot because I wanted to enhance my own discord server and was fascinated about how I could create it myself. This was what started me with programming and what kept me going for my first few years.</p><p>I have made many projects along the way ranging many subjects, Databases, Discord Bots, Web Interfaces, Executables, Machine Learning. But over these years I was mainly focusing on school and this was just a hobby. From these small projects I gained a good understanding of python and its syntax and could overcome any challenge presented to me.</p><p>I have 3 Projects which I would define as notable.<ul><li>VoiceMeeter Fix</li><li>cheekyutils</li><li>png2ico</li></ul></p>",
+      info: `I began learning Python in 2018 by creating my own Discord bot, sparking my passion for programming.
+      
+Over the years, I've completed various projects, including:
+- Databases
+- Discord Bots
+- Web Interfaces
+- Executables
+- Machine Learning
+
+Notable projects include
+- VoiceMeeter Fix: A program that automates settings adjustments
+- cheekyutils: A PyPi package for efficient user inputs
+- png2ico: A tool for converting images to .ico files.
+
+Since 2018, I've made significant progress in my Python skills and look forward to future projects.`,
     },
     {
       title: "HTML",
@@ -274,7 +288,9 @@ function LanguageCard({
       data-active={getActiveText(currentCard, index, langCards)}
     >
       <h4>{card.title}</h4>
-      <HTMLParser html={card.info} />
+      <div className="content">
+        <ReactMarkdown children={card.info} />
+      </div>
     </div>
   );
 }

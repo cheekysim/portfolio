@@ -68,18 +68,15 @@
 .langcardsWrapper .textWrapper .card[data-active="next"] {
   opacity: 0;
   transform: translate(-50%, -70%);
-  z-index: 1;
 }
 
 .langcardsWrapper .textWrapper .card[data-active="prev"] {
   opacity: 0;
   transform: translate(-50%, -30%);
-  z-index: 2;
 }
 
 .langcardsWrapper .textWrapper .card[data-active="current"] {
   opacity: 1;
-  z-index: 3;
 }
 
 .card .shadow {
