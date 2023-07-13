@@ -41,8 +41,7 @@ while True:
       for t2 in range(len(option) + 1):
         distances[0][t2] = t2
 
-      for t1 in range(1, len(inp) + 1):
-        for t2 in range(1, len(option) + 1):
+      for t1 in range(1, len(inp) + 1): 
           if inp[t1-1] == option[t2-1]:
             distances[t1][t2] = distances[t1 - 1][t2 - 1]
           else:
