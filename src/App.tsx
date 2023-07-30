@@ -1,6 +1,7 @@
 import "./assets/css/App.css";
 import { Hero } from "./components/Hero";
 import { Toaster } from "react-hot-toast";
+import { About } from "./components/About";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         }}
       />
       <Hero />
+      <About />
     </>
   );
 }
