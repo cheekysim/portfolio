@@ -129,7 +129,16 @@ Since 2018, I've made significant progress in my Python skills and look forward 
     </div>
   </div>
 </section>`,
-      info: "I started using HTML not that long ago, I have built multiple projects in HTML",
+      info: `I started learning HTML in 2020, I never did any projects with it because I did not understand much, or how to use CSS.
+
+Once I started college my HTML really started to pick up, I made fun test websites and learned about different HTML tags.
+
+I have made and published a few websites since.
+
+- [cheekysim.com](https://cheekysim.com "cheekysim.com")
+- [Immersive Labs Stats](https://ils.cheekysim.com "ils.cheekysim.com")
+
+I have also done plenty of experiments that have not been published.`,
     },
     {
       title: "CSS",
