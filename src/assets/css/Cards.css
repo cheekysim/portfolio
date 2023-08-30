@@ -73,6 +73,7 @@
     position: relative;
     width: 40vw;
     height: 100lvh;
+    overflow: hidden;
 
     .card {
       position: absolute;
@@ -87,7 +88,7 @@
       transition: all 0.3s ease;
 
       .content {
-        max-height: 80vh;
+        max-height: 70vh;
         overflow: auto;
       }
 
@@ -141,11 +142,11 @@
   }
 
   .next {
-    right: 1rem;
+    right: 2rem;
   }
 
   .prev {
-    left: 1rem;
+    left: 2rem;
   }
 }
 

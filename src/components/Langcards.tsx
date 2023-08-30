@@ -168,7 +168,16 @@ I have also done plenty of experiments that have not been published.`,
   border-radius: 1rem;
   transition: all 0.3s ease;
 }`,
-      info: "I started using css not that long ago, I have built multiple projects in css",
+      info: `I started learning CSS along with HTML in 2020. At first, it felt a bit confusing, especially since I didn't get how CSS worked with HTML. But things changed when I got to college. CSS started making more sense, and I started creating fun test websites to play around with different styles.
+
+I didn't stop at theory. I actually made and shared a bunch of websites to put my CSS skills to the test:
+
+- [cheekysim.com](https://cheekysim.com "cheekysim.com")
+- [Immersive Labs Stats](https://ils.cheekysim.com "ils.cheekysim.com")
+
+I've got quite a few experiments under my belt that I haven't shared yet. These behind-the-scenes projects helped me get even better at CSS and how to make websites look cool.
+
+Keep an eye out for more updates as I keep growing my CSS skills.`,
     },
     {
       title: "JavaScript",
@@ -197,7 +206,19 @@ async function getDnsRecords(zoneId): {
     const { data } = await axios.request(options);
     return data.result;
 }`,
-      info: "I started using javascript not that long ago, I have built multiple projects in javascript",
+      info: `My journey into JavaScript began during my college years in 2021, marking a transition from Python to this dynamic scripting language. This transition was like unlocking a new world of possibilities. JavaScript's ability to bring websites to life fascinated me, and I quickly immersed myself in its intricacies.
+
+Shifting from Python to JavaScript was transformative. I grasped concepts like variables, loops, and functions, which soon translated into projects that showcased my newfound skills. What's more, I didn't stop at the basics. I ventured into Node.js, a runtime environment that extended JavaScript's capabilities beyond the browser.
+
+With Node.js, I could build not only client-side applications but also server-side applications. I harnessed tools like Express.js to craft efficient and powerful backends, adding a new dimension to my skill set. This newfound knowledge enabled me to create full-stack applications that seamlessly integrated front-end and back-end functionalities.
+
+Here are a few highlights of my JavaScript journey:
+
+- Building interactive features for [cheekysim.com](https://cheekysim.com "cheekysim.com") and related projects.
+- Exploring Node.js and Express.js to construct robust server-side components.
+- Crafting client-side applications that deliver dynamic user experiences.
+
+As I continue on this path, I eagerly anticipate further exploration of JavaScript, Node.js, and their combined potential to shape the future of web development.`,
     },
     {
       title: "TypeScript",
@@ -233,7 +254,18 @@ async function getDnsRecords(zoneId): {
     }
   })
 );`,
-      info: "I started using typescript not that long ago, I have built multiple projects in typescript",
+      info: `In my second year of college, I stumbled upon TypeScript, and it transformed the way I approached web development. Once I got a taste of TypeScript's structured nature and enhanced tooling, there was no turning back.
+
+My initial exploration of TypeScript felt like leveling up. The strong typing system provided a safety net, catching errors before they even happened. This meant my projects were not only more robust but also easier to manage as they grew in complexity.
+
+From that point forward, TypeScript became my go-to language for web development. I rewired my approach, converting JavaScript projects into TypeScript-powered ones. This shift not only improved the quality of my code but also increased my development speed. TypeScript's support for modern JavaScript features and additional type annotations allowed me to create clearer, more maintainable codebases.
+
+As I embraced TypeScript, my skills expanded even further:
+
+All my projects, including [cheekysim.com](https://cheekysim.com "cheekysim.com") and related endeavors, were built using TypeScript.
+I ventured into creating custom type definitions to ensure consistency and improve collaboration.
+The structured nature of TypeScript encouraged me to dive deeper into software design principles.
+My journey with TypeScript is ongoing, and I'm excited to keep exploring its capabilities, leveraging its type system to build powerful and efficient web applications.`,
     },
   ];
 
