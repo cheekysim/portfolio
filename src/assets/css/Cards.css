@@ -155,3 +155,30 @@ section.languages {
   background-position: center;
   background-size: cover;
 }
+
+@media screen and (max-aspect-ratio: 1/1) {
+  .langcardsWrapper {
+    flex-direction: column;
+
+    .cardWrapper {
+      width: 100vw;
+      height: 40lvh;
+
+      .card {
+        width: 50vw;
+      }
+    }
+
+    .textWrapper {
+      width: 100vw;
+      height: 60lvh;
+      .card {
+        width: 80vw;
+
+        .content {
+          max-height: 44lvh;
+        }
+      }
+    }
+  }
+}
