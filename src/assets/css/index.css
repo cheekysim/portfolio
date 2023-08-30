@@ -7,6 +7,7 @@
   --color-scrollbar: hsl(0, 0%, 25%);
   --scrollbar-width: 1rem;
   font-size: 62.5%;
+  font-size: clamp(0.4rem, 0.5vw + 0.1rem, 1.6rem);
 }
 
 * {
@@ -16,6 +17,7 @@
   font-family: "PT Mono", monospace, "Roboto", sans-serif;
   list-style: none;
   text-decoration: none;
+  /* outline: 1px dotted red; */
 }
 
 html {
@@ -91,17 +93,25 @@ h6 {
 }
 
 span {
-  font-size: 2rem;
+  font-size: 2em;
   color: var(--color-text);
 }
 
 p {
   font-size: 2rem;
   color: var(--color-text);
+  margin: 1em 0;
 }
 
 a {
   color: var(--color-text);
+}
+
+li {
+  font-size: 2rem;
+  color: var(--color-text);
+  list-style-type: disc;
+  margin-left: 1em;
 }
 
 input {
