@@ -175,7 +175,7 @@ I didn't stop at theory. I actually made and shared a bunch of websites to put m
 - [cheekysim.com](https://cheekysim.com "cheekysim.com")
 - [Immersive Labs Stats](https://ils.cheekysim.com "ils.cheekysim.com")
 
-I've got quite a few experiments under my belt that I haven't shared yet. These behind-the-scenes projects helped me get even better at CSS and how to make websites look cool.
+I've got quite a few experiments under my belt that I haven't shared yet. These behind-the-scenes projects helped me enhance my CSS and make websites that look more interesting and unique.
 
 Keep an eye out for more updates as I keep growing my CSS skills.`,
     },
